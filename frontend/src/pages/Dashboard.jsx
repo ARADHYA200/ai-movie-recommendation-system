@@ -6,6 +6,7 @@ import TraitGrid from "../components/TraitGrid"
 import GenreDistribution from "../components/GenreDistribution"
 import Recommendations from "../components/Recommendations"
 import LoadingSpinner from "../components/LoadingSpinner"
+import SkeletonLoader from "../components/SkeletonLoader"
 import Toast from "../components/Toast"
 import { getDashboardData } from "../services/api"
 import useToast from "../hooks/useToast"
@@ -176,6 +177,10 @@ export default function Dashboard() {
       </div>
 
       {/* Cluster Distribution */}
+      {loading && <SkeletonLoader count={6} />}
+      {!loading && error && (
+        <div className="rounded-2xl border border-rose-500/30 bg-rose-500/5 p-6 text-rose-200 text-sm">{error}</div>
+      )}
       {!loading && !error && clusterStats.length > 0 && (
         <div className="rounded-3xl border border-zinc-800 bg-zinc-950 p-8">
           <h2 className="text-2xl font-semibold text-white mb-8">Movie Cluster Distribution</h2>

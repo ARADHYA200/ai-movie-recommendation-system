@@ -5,6 +5,7 @@ import LoadingSpinner from "../components/LoadingSpinner"
 import Toast from "../components/Toast"
 import { analyzeMovies } from "../services/api"
 import useToast from "../hooks/useToast"
+import { addRecommendationHistory } from "../hooks/useUserStorage"
 
 export default function Analyzer() {
   const navigate = useNavigate()
@@ -33,6 +34,10 @@ export default function Analyzer() {
         JSON.stringify({ analysis, movies: validMovies })
       )
       showToast("Analysis completed. Redirecting to dashboard.", "success")
+      addRecommendationHistory({
+        source: validMovies.join(", "),
+        recommendations: analysis.recommendations?.slice(0, 5).map((r) => r.title) || [],
+      })
       navigate("/dashboard", { state: { analysis, movies: validMovies } })
     } catch (err) {
       const message = err?.message ?? "Unable to analyze movies."

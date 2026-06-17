@@ -44,11 +44,17 @@ export default function Landing() {
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
             <Link
-              to="/analyzer"
+              to="/browse"
               className="inline-flex items-center justify-center rounded-2xl bg-gradient-to-r from-purple-600 to-pink-600 px-8 py-4 text-lg font-semibold text-white transition hover:from-purple-500 hover:to-pink-500 hover:shadow-lg hover:shadow-purple-500/50"
             >
-              Start Analyzing
+              Browse Movies
               <span className="ml-2">→</span>
+            </Link>
+            <Link
+              to="/analyzer"
+              className="inline-flex items-center justify-center rounded-2xl border border-zinc-700 px-8 py-4 text-lg font-semibold text-zinc-100 transition hover:border-purple-500 hover:bg-purple-500/5"
+            >
+              Analyze My Taste
             </Link>
             <a
               href="#features"
@@ -143,10 +149,16 @@ export default function Landing() {
             ))}
           </div>
 
-          <div className="mt-12 text-center">
+          <div className="mt-12 text-center flex flex-col sm:flex-row gap-4 justify-center">
+            <Link
+              to="/browse"
+              className="inline-flex items-center justify-center rounded-2xl bg-gradient-to-r from-purple-600 to-pink-600 px-8 py-4 text-lg font-semibold text-white transition hover:from-purple-500 hover:to-pink-500"
+            >
+              Browse Movies
+            </Link>
             <Link
               to="/analyzer"
-              className="inline-flex items-center justify-center rounded-2xl bg-gradient-to-r from-purple-600 to-pink-600 px-8 py-4 text-lg font-semibold text-white transition hover:from-purple-500 hover:to-pink-500"
+              className="inline-flex items-center justify-center rounded-2xl border border-zinc-700 px-8 py-4 text-lg font-semibold text-zinc-100 transition hover:border-purple-500 hover:bg-purple-500/5"
             >
               Start Your Analysis
             </Link>

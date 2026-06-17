@@ -13,8 +13,7 @@ def analyze_movies(data: MovieInput):
     """
     if not data.movies or all(not m.strip() for m in data.movies):
         raise HTTPException(status_code=400, detail="Please provide at least one movie title")
-    
-    # Filter out empty strings
+
     movies = [m.strip() for m in data.movies if m.strip()]
     
     try:

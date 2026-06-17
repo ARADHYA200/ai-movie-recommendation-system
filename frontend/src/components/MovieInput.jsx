@@ -32,7 +32,7 @@ export default function MovieInput({ movies, onMoviesChange }) {
         {movies.map((movie, index) => {
           const hasError = touchedIndex === index && !movie.trim()
           return (
-            <div key={`${movie}-${index}`} className="space-y-2 rounded-3xl border border-zinc-800 bg-zinc-900 p-4">
+            <div key={`movie-${index}`} className="space-y-2 rounded-3xl border border-zinc-800 bg-zinc-900 p-4">
               <div className="flex items-center justify-between gap-3">
                 <label className="text-sm font-semibold text-white">Movie #{index + 1}</label>
                 {movies.length > 1 ? (

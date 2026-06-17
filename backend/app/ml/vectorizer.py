@@ -1,23 +1,26 @@
-import pandas as pd
-import ast
 from sklearn.feature_extraction.text import TfidfVectorizer
 
-movies_df = pd.read_csv("data/tmdb_5000_movies.csv")
+from app.utils.data_loader import load_movies_dataset
 
-movies_df = movies_df[['title', 'overview', 'genres']].dropna()
+_movies_df = None
+_tfidf_matrix = None
+_vectorizer = None
 
-def extract_genres(genre_str):
-    try:
-        genres = ast.literal_eval(genre_str)
-        return [g['name'] for g in genres]
-    except:
-        return []
 
-movies_df['genre_list'] = movies_df['genres'].apply(extract_genres)
-movies_df['content'] = movies_df['title'] + " " + movies_df['overview']
+def _initialize():
+    global _movies_df, _tfidf_matrix, _vectorizer
+    if _movies_df is not None:
+        return
+    _movies_df = load_movies_dataset()
+    _vectorizer = TfidfVectorizer(stop_words="english", max_features=15000, ngram_range=(1, 2))
+    _tfidf_matrix = _vectorizer.fit_transform(_movies_df["content"])
 
-vectorizer = TfidfVectorizer(stop_words='english')
-tfidf_matrix = vectorizer.fit_transform(movies_df['content'])
 
 def get_dataset():
-    return movies_df, tfidf_matrix
+    _initialize()
+    return _movies_df, _tfidf_matrix
+
+
+def get_vectorizer():
+    _initialize()
+    return _vectorizer

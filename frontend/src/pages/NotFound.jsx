@@ -10,18 +10,9 @@ export default function NotFound() {
           The page you are looking for does not exist. Return to the analyzer or the landing page to continue.
         </p>
         <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:justify-center">
-          <Link
-            to="/"
-            className="rounded-2xl bg-purple-600 px-6 py-3 text-white transition hover:bg-purple-500"
-          >
-            Home
-          </Link>
-          <Link
-            to="/analyzer"
-            className="rounded-2xl border border-zinc-700 px-6 py-3 text-white transition hover:border-purple-500"
-          >
-            Analyzer
-          </Link>
+          <Link to="/" className="rounded-2xl bg-purple-600 px-6 py-3 text-white transition hover:bg-purple-500">Home</Link>
+          <Link to="/browse" className="rounded-2xl border border-zinc-700 px-6 py-3 text-white transition hover:border-purple-500">Browse</Link>
+          <Link to="/analyzer" className="rounded-2xl border border-zinc-700 px-6 py-3 text-white transition hover:border-purple-500">Analyzer</Link>
         </div>
       </div>
     </section>

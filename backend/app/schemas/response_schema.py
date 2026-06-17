@@ -1,30 +1,35 @@
+from typing import List, Optional
+
 from pydantic import BaseModel
-from typing import List, Dict, Optional
 
 
 class TraitsResponse(BaseModel):
-    """Movie taste traits with percentage values."""
     name: str
     value: int
     description: str
 
 
 class GenreAffinityResponse(BaseModel):
-    """Genre preference breakdown."""
     genre: str
     percentage: int
     movie_count: int
 
 
 class RecommendationResponse(BaseModel):
-    """Individual movie recommendation."""
+    id: int
     title: str
+    overview: Optional[str] = ""
+    genres: List[str] = []
+    vote_average: float = 0.0
+    popularity: float = 0.0
+    release_year: Optional[int] = None
+    director: str = ""
+    cast: List[str] = []
     reason: str
     match_score: float
 
 
 class PersonalityDNAResponse(BaseModel):
-    """Complete personality DNA analysis."""
     personality_type: str
     personality_archetype: str
     description: str
@@ -37,7 +42,6 @@ class PersonalityDNAResponse(BaseModel):
 
 
 class VisualizationDataPoint(BaseModel):
-    """Single data point for visualization."""
     title: str
     cluster: int
     pca_x: float
@@ -46,7 +50,54 @@ class VisualizationDataPoint(BaseModel):
 
 
 class VisualizationResponse(BaseModel):
-    """Cluster visualization data."""
     data: List[VisualizationDataPoint]
     total_movies: int
     cluster_count: int
+
+
+class MovieResponse(BaseModel):
+    id: int
+    title: str
+    overview: str
+    genres: List[str]
+    keywords: List[str] = []
+    cast: List[str] = []
+    director: str = ""
+    vote_average: float
+    vote_count: int = 0
+    popularity: float
+    release_year: Optional[int] = None
+    original_language: str = "en"
+    tagline: str = ""
+
+
+class MovieListResponse(BaseModel):
+    movies: List[MovieResponse]
+    total: int
+    page: int
+    limit: int
+    total_pages: int
+
+
+class SearchResponse(BaseModel):
+    movies: List[MovieResponse]
+    total: int
+    page: int
+    limit: int
+    total_pages: int
+    query: str = ""
+
+
+class GenresResponse(BaseModel):
+    genres: List[str]
+    total: int
+
+
+class RecommendResponse(BaseModel):
+    recommendations: List[RecommendationResponse]
+    movies_matched: int
+    matched_titles: List[str] = []
+
+
+class ErrorResponse(BaseModel):
+    detail: str
