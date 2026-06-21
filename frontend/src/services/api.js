@@ -1,6 +1,9 @@
 ﻿import axios from "axios"
 
-const baseURL = import.meta.env.VITE_API_URL || "http://localhost:8000"
+const baseURL =
+  window.location.hostname === "localhost"
+    ? "http://localhost:8000"
+    : "https://ai-movie-recommendation-system-o4t4.onrender.com";
 
 const api = axios.create({
   baseURL,
