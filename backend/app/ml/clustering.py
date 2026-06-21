@@ -1,14 +1,35 @@
 import numpy as np
-from sklearn.cluster import KMeans
-from sklearn.decomposition import PCA
-
+import joblib
+from pathlib import Path
 from app.ml.vectorizer import get_dataset
 
-NUM_CLUSTERS = 6
+MODEL_DIR=Path(__file__).parent/"models"
 
-_movies_df = None
-_movie_clusters = None
-_reduced_vectors = None
+_clusters=np.load(
+    MODEL_DIR/"cluster_labels.npy"
+)
+
+_movies_df,_=get_dataset()
+
+_movies_df["cluster"]=_clusters
+
+coords=np.load(
+    MODEL_DIR/"pca_coordinates.npy"
+)
+
+_movies_df["pca_x"]=coords[:,0]
+_movies_df["pca_y"]=coords[:,1]
+# import numpy as np
+# from sklearn.cluster import KMeans
+# from sklearn.decomposition import PCA
+
+# from app.ml.vectorizer import get_dataset
+
+# NUM_CLUSTERS = 6
+
+# _movies_df = None
+# _movie_clusters = None
+# _reduced_vectors = None
 
 
 def _initialize():
